@@ -1,0 +1,11 @@
+sort1 uses: Bubble sort
+
+How do you know?: Because when sorting an already sorted sequence, the time it takes is significantly faster than when sorting random or reverse-ordered sequences.
+
+sort2 uses: Merge sort
+
+How do you know?: Because it takes the shortest time when sorting all kinds of sequences.
+
+sort3 uses: Selection sort
+
+How do you know?: Because when sorting an already sorted sequence, the time it takes does not decrease.
