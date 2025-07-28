@@ -1,0 +1,12 @@
+1. If songs.db contains the top 100 songs of one listener from 2018, their audio aura would be characterized by the average values of energy, valence, and danceability across those songs. For example, if the average energy is high, the aura might be described as "energetic"; if valence is low, it might be "melancholic"; and if danceability is high, it might be "groovy" or "danceable." The aura would reflect the general mood and style of the songs the listener played most frequently in 2018.
+
+2. Calculating the audio aura based only on the average of energy, valence, and danceability may not be very representative of the listener for several reasons:
+- It ignores the diversity and range of moods in the listener's top songs. A listener might enjoy both very happy and very sad songs, but the average would suggest a neutral mood.
+- It does not account for the context in which songs are played (e.g., background music vs. focused listening).
+- It treats all top 100 songs equally, even though some may have been played much more than others.
+
+Better ways to calculate the aura could include:
+- Using weighted averages based on play counts or listening duration.
+- Clustering songs into mood categories and identifying the most prominent clusters.
+- Incorporating additional audio features (such as tempo, acousticness, or lyrics sentiment).
+- Analyzing listening patterns over time to see how moods change throughout the year.

@@ -47,3 +47,6 @@ build/
 # Backup files
 *~
 *.bak
+
+# Ignore large database file
+07 - SQL/Pset/movies/movies.db
