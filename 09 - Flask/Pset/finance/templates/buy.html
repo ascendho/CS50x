@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy
+{% endblock %}
+
+{% block main %}
+    <div class="text-center">
+        <h3 class="h3 mb-3 fw-normal">Buy</h3>
+        <form action="/buy" method="post">
+            <div class="mb-3">
+                <input autocomplete="on" class="form-control mx-auto w-auto" name="symbol" placeholder="Quote" type="text" value="{{ symbol }}" {% if not selected_symbol %}autofocus{% endif %}>
+                <input autocomplete="off" class="form-control mx-auto w-auto" name="shares" placeholder="Shares" type="number" {% if selected_symbol %}autofocus{% endif %}>
+            </div>
+            <button class="btn btn-primary action" type="submit">Buy</button>
+        </form>
+    </div>
+{% endblock %}

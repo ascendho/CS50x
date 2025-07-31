@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+
+    <div class="row align-items-center mb-5">
+
+    <!-- Greeting -->
+        <h3 class="h3 mb-3 fw-normal">Transaction history</h3>
+
+    <!-- Table -->
+        <table class="table">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col">Transaction</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Shares</th>
+                    <th scope="col">Purchase price</th>
+                    <th scope="col">Total price</th>
+                    <th scope="col">Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stock in dashboard %}
+
+                    <tr>
+                        <td>{{ stock.transaction_type }}</td>
+                        <td>{{ stock.symbol }}</td>
+                        <td>{{ stock.shares }}</td>
+                        <td>{{ stock.price | usd }}</td>
+                        <td>{{ stock.total_price | usd }}</td>
+                        <td>{{ stock.time }}</td>
+                    </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </table>
+
+{% endblock %}

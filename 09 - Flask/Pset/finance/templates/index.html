@@ -1,0 +1,126 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Homepage
+{% endblock %}
+
+{% block main %}
+
+    <div class="row align-items-center mb-3">
+
+    <!-- Greeting -->
+        <div class="col-12 col-md order-md-0 text-center text-md-start my-4">
+            <h1>Hello, {{ username }}</h1>
+            <p class="fs-lg text-body-secondary mb-0">Here's an overview of your stock portfolio.</p>
+        </div>
+
+    <!-- Cash balance card -->
+        <div class="col-12 col-md-6 col-xxl-3 mb-4 mb-xxl-0" style="min-width:300px;">
+            <div class="card bg-body-tertiary border-transparent">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col">
+                        <!-- Heading -->
+                            <h4 class="f-sm fw-normal text-body-secondary mb-1">Cash balance</h4>
+                        <!-- Text -->
+                            <div class="fs-4 fw-semibold">{{ cash | usd }}</div>
+                        </div>
+                        <div class="col-auto">
+                        <!-- Avatar -->
+                            <div class="avatar bg-body text-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-stack" viewBox="0 0 16 16">
+                                    <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4"></path>
+                                    <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {% if no_display %}
+        <div class="container p-5 bg-light rounded-2 border text-center">
+            <p>Start your investment journey with CS50!</p>
+            <a class="btn btn-primary me-md-2 action" style="width: 11rem;" href="/buy">Buy Stock</a>
+        </div>
+    {% endif %}
+
+    {% if not no_display %}
+<!-- Table -->
+        <table class="table align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Company</th>
+                    <th scope="col">Shares</th>
+                    <th scope="col">Current price</th>
+                    <th scope="col">Total</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for stock in display %}
+
+                    <tr>
+                        <td>{{ stock.symbol }}</td>
+                        <td>{{ stock.company_name }}</td>
+                        <td>{{ stock.total_shares }}</td>
+                        <td>{{ lookup(stock.symbol)["price"] | usd }}</td>
+                        <td>{{ (lookup(stock.symbol)["price"] * stock.total_shares) | usd }}</td>
+                        <td>
+                            <div class="d-grid d-md-flex justify-content-md-end">
+                                <form action="/buy" method="GET">
+                                    <input type="hidden" name="symbol" value="{{ stock.symbol }}">
+                                    <button class="btn btn-primary me-md-2 action" type="submit">Buy</button>
+                                </form>
+                                <form action="/sell" method="GET">
+                                    <input type="hidden" name="symbol" value="{{ stock.symbol }}">
+                                    <button class="btn btn-dark action" type="submit">Sell</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="row align-items-center pt-3 mb-5">
+
+            <div class="col-12 col-md order-md-0 text-center text-md-start my-4"></div>
+
+    <!-- Total balance card -->
+            <div class="col-12 col-md-6 col-xxl-3" style="min-width:300px;">
+                <div class="card border-transparent" style="background-color: #05f; color: white;">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col">
+                        <!-- Heading -->
+                                <h4 class="f-sm fw-normal mb-1"><b>Total balance</b></h4>
+                        <!-- Text -->
+                                <div class="fs-4 fw-semibold">{{ (total or 0) | usd }}</div>
+                            </div>
+                            <div class="col-auto">
+                        <!-- Avatar -->
+                                <div class="avatar bg-body" style="background-color:#3166f6 !important;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-bar-graph-fill" viewBox="0 0 16 16">
+                                        <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2m-2 11.5v-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5m-2.5.5a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5zm-3 0a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    {% endif %}
+
+
+
+{% endblock %}

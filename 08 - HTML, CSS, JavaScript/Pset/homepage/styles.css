@@ -1,0 +1,53 @@
+/* styles.css */
+
+/* 1. Tag selector */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. Class selector */
+.custom-header {
+    color: #343a40;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 2.5rem;
+}
+
+/* 3. ID selector */
+#main-content {
+    background: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 40px auto;
+    max-width: 800px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* 4. Descendant selector */
+nav a {
+    color: #007bff;
+    margin: 0 10px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+/* 5. Pseudo-class selector */
+nav a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Additional styling for responsiveness */
+@media (max-width: 600px) {
+    #main-content {
+        padding: 15px;
+        margin: 20px 5px;
+    }
+
+    .custom-header {
+        font-size: 1.5rem;
+    }
+}

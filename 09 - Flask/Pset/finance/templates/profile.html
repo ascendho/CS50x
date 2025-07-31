@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block main %}
+
+    <div class="text-center">
+        <div class="border-bottom">
+            <h3 class="h3 mb-2 fw-normal">Hello, {{ username }}</h3>
+            <p class="fs-lg text-body-secondary mb-0 pb-5">Here's your profile page.</p>
+        </div>
+
+        <div class="border-bottom">
+            <h3 class="h5 mt-5 mb-2 fw-normal">Your cash balance: {{ cash | usd }}</h3>
+            <p class="fs-lg text-body-secondary mb-0">Add from $1.00 to $5,000.00 at a time.</p>
+            <form action="/profile" method="post" class="pb-5">
+                <div class="mb-3 pt-3 pb-1">
+                    <input type="hidden" name="form_type" value="add_cash">
+                    <input autocomplete="off" class="form-control mx-auto w-auto" name="add_cash" placeholder="Cash to add" type="number">
+                </div>
+                <button class="btn btn-primary" type="submit">Add money</button>
+            </form>
+        </div>
+
+        <div class="border-bottom pb-5">
+            <h3 class="h5 mt-5 mb-1 fw-normal">Change your password</h3>
+            <form action="/profile" method="post">
+                <input type="hidden" name="form_type" value="change_password">
+                <div class="mb-3">
+                    <div class="pt-3 pb-1">
+                        <input autocomplete="off" class="form-control mx-auto w-auto" name="current_password" placeholder="Current password" type="text">
+                    </div>
+                    <div class="pb-2 pt-1">
+                        <input autocomplete="off" class="form-control mx-auto w-auto" name="new_password" placeholder="New password" type="text">
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit">Change password</button>
+            </form>
+        </div>
+
+    </div>
+
+{% endblock %}
