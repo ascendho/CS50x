@@ -1,0 +1,23 @@
+# Git attributes file to specify repository languages
+
+# Mark C files as the primary language
+*.c linguist-language=C
+*.h linguist-language=C
+
+# Mark Python files as the primary language  
+*.py linguist-language=Python
+
+# Mark other files with lower priority
+*.js linguist-detectable=false
+*.html linguist-detectable=false
+*.css linguist-detectable=false
+*.md linguist-documentation
+*.pdf linguist-documentation
+*.pptx linguist-documentation
+*.sb3 linguist-detectable=false
+
+# Exclude certain directories from language detection
+assets/* linguist-vendored
+Slides/* linguist-documentation
+Notes/* linguist-documentation
+Seminars/* linguist-documentation
