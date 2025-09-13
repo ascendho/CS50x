@@ -1,0 +1,7 @@
+fffff537 lui x10, 0xfffff       # 赋值x10 = 0xfffff000
+ffff50513 addi x10, x10, 0xfff  # 赋值x10 = 0xffffffff
+00100593 addi x11, x0, 1        # 赋值x11 = 0x1
+00f70733 add x12, x10, x11      # 计算x12 = x + y
+00e705b3 sltu x12, x12, x10     # 比较x12与x10的无符号数
+00a63633 add x1, x0, x12        # 将结果x12写入返回值寄存器查看
+00c000b3                        # （指令片段，用于后续二进制转换）

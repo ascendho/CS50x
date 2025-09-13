@@ -1,0 +1,12 @@
+CC = riscv64-elf-gcc  # 选择自己的编译器路径，这里使用通过brew安装的RISC-V架构的交叉编译器
+CFLAGS = -g -Wall -Werror -std=c99 -march=rv32im -mabi=ilp32 -c  # 编译器参数（含架构、ABI 配置）
+OBJDUMP = ~/riscv/bin/riscv64-unknown-elf-objdump  # RISC-V 反汇编工具路径
+
+build:
+	$(CC) $(CFLAGS) Factorial.c -o fact.o  # 编译生成目标文件
+
+objdump:
+	$(OBJDUMP) -d fact.o  # 对目标文件反汇编，查看 RISC-V 指令
+
+clean:
+	rm -f fact.o  # 清理生成的目标文件

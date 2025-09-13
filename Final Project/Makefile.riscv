@@ -1,0 +1,12 @@
+CC = riscv64-elf-gcc  # 选择自己的编译器路径，这里使用通过brew安装的RISC-V架构的交叉编译器
+# 编译器参数（调试信息、警告全开、错误视为警告、C99 标准、指定架构为 rv32im、ABI 为 ilp32）
+CFLAGS = -g -Wall -Werror -std=c99 -march=rv32im -mabi=ilp32 -c
+# RISC-V 反汇编工具路径
+OBJDUMP = ~/riscv/bin/riscv64-unknown-elf-objdump
+
+build:
+	$(CC) $(CFLAGS) Overflow.c -o overflow-riscv64.o
+	$(OBJDUMP) -d overflow-riscv64.o
+
+clean:
+	rm -f overflow-riscv64.o

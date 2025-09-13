@@ -1,0 +1,86 @@
+# 算术/逻辑运算指令测试
+12300093 addi x1, x0, 0x123
+12308113 addi x2, x0, 0x123   # x2 值应为 0x246
+00208133 add x2, x1, x2
+402080b3 sub x1, x1, x2       # x1 值应为 0xffffffed
+12300093 addi x1, x0, 0x123
+cbc08113 andi x2, x0, 0xcbd
+002081b3 and x1, x1, x2       # x1 值应为 0x21
+12300093 addi x1, x0, 0x123
+abc08113 addi x2, x0, 0xabc
+0020c0b3 xor x1, x1, x2       # x1 值应为 0xfffffb9f
+12300093 addi x1, x0, 0x123
+00c08113 addi x2, x0, 12
+002090b3 sll x1, x1, x2       # x1 值应为 0x123000
+12300093 addi x1, x0, 0x123
+00408113 addi x2, x0, 4
+0020d0b3 srl x1, x1, x2       # x1 值应为 0x12
+fab00093 addi x1, x0, 0xfab
+00408113 addi x2, x0, 4
+4020d0b3 sra x1, x1, x2       # x1 值应为 0xfffffffa
+12300093 addi x1, x0, 0x123
+
+# 比较/分支指令测试
+abc00113 addi x2, x0, 0xabc
+0020a0b3 slt x1, x1, x2       # x1 值应为 0x1
+12300093 addi x1, x0, 0x123
+abc00113 addi x2, x0, 0xabc   # 设置内存基地址 [4096]
+0020b0b3 slt x1, x1, x2
+000010b7 lui x1, 1            # x2 值应为 0x1234a000
+1234a137 lui x2, 0x1234a
+0bc00193 addi x3, x3, 0
+0b419193 sdlt x3, x2, x3
+08310133 add x2, x2, x3       # x2 值应为 0x1234abcd
+08d20113 addi x2, x2, 0xd
+082a0623 sw x3, 12(x1)        # x3 值应为 0xffffffcd
+08c8183 lb x3, 12(x1)         # x3 值应为 0xffffabcd
+08c9183 lh x3, 12(x1)         # x3 值应为 0x1234abcd
+08ca183 lw x3, 12(x1)         # x3 值应为 0xcd
+08cc183 lbu x3, 12(x1)        # x3 值应为 0xabcd
+08cd183 lhu x3, 12(x1)
+082a0823 sb x2,14(x1)
+08c8173 lw x3,12(x1)          # x3 值应为 0x12cdabcd
+08290723 sh x2,14(x1)
+08c8183 lw x3,12(x1)          # x3 值应为 0xabcdabcd
+abc00113 addi x1, x0, 0xabc
+affc0093 addi x1, x1, 0xfff   # x1 值应为 0xfffffabc
+abc00113 addi x1, x0, 0xabc
+012e0093 andi x1, x1, 0x012   # x1 值应为 0xfffffabe
+abc0093 addi x1, x0, 0xabc
+fffc0093 addi x1, x1, 0xfff   # x1 值应为 0x00000543
+abc0093 addi x1, x0, 0xabc
+0100093 slli x1, x1, 16       # x1 值应为 0xfabc0000
+abc0093 addi x1, x0, 0xabc
+040d093 srli x1, x1, 4        # x1 值应为 0x0fffffab
+abc0093 addi x1, x0, 0xabc
+404d093 srai x1, x1, 4        # x1 值应为 0xfffffffab
+abc0093 addi x1, x0, 0xabc
+79a0a093 slt x1, x0, 0x79a    # x1 值应为 1
+abc0093 addi x1, x0, 0xabc
+89a0b093 sltiu x1, x1, 0x89a  # x1 值应为 0
+abc0093 addi x1, x1, 0x89a
+00108463 beq x1, x1, 8        # 应跳转到 +8 位置
+0000093 addi x1, x0, 0        # 此处不应执行
+0000093 addi x1, x1, 0
+70109863 bne x1, x1, 10000    # x1 值应非 0
+70100093 blt x1, x1, 10000
+0170093 bitt x1, x0, 23
+0011563 addi x2, x1, 12       # 此处不应执行
+001563 addi x1, x0, 0         # 此处不应执行
+0000093 addi x1, x1, 0        # x1 值应非 0
+0000093 addi x1, x1, 0
+0000097 auipc x1, 0           # x1 保存当前 PC 值
+0000013 addi x0, x0, 0
+0000013 addi x0, x0, 0
+0000013 addi x0, x0, 0
+ffffc013 addi x2, x1, 0xffffc010  # x2 = x1 + 0xffffc010
+00000197 auipc x0, -4
+1ffc1c17 addi x3, x3, 16      # x3 = 0xffffc010
+003908b3 add x1, x1, x3       # x1、x2 值应相等
+000000ef jal x1,8
+0000093 addi x8, x0, 0        # 此处不应执行
+0000093 addi x1, x1, 0        # x1 值应非 0
+0000097 auipc x1, 0           # x1 保存当前 PC 值
+0000017 jalr x2, 12(x1)       # x2 应保存 x1 + 8
+0000093 addi x1, x0, 0        # 此处不应执行
+0000093 addi x1, x1, 0        # x1 值应非 0
