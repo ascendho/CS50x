@@ -25,4 +25,4 @@
 
 ## 结业证书
 
-<img src="certificate/cs50x.png ">
+<img src="certificate/CS50x.png ">
